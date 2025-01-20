@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,7 +12,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,18 +28,10 @@ public class PlayerController : MonoBehaviour
         //transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
         //transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
     }
-
     private void FixedUpdate()
     {
         Vector3 input = new Vector3(horizontalInput, 0, verticalInput).normalized;
         input = playerRb.rotation * input;
         playerRb.MovePosition(transform.position + input * Time.fixedDeltaTime * speed);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
-        transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
-        
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
     }
 }
