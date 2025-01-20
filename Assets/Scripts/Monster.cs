@@ -7,6 +7,7 @@ public class Monster : MonoBehaviour
     public GameObject player;
     public GameObject[] targets;
     public GameObject closestTarget;
+    public float monsterSpeed = 7;
     float closestDist;
     float dist;
 
@@ -42,5 +43,7 @@ public class Monster : MonoBehaviour
                 Debug.Log(i);
             }  
         }
+
+        transform.Translate(Vector3.Normalize(closestTarget.transform.position - transform.position) * monsterSpeed * Time.deltaTime);
     }
 }
