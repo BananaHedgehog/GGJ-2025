@@ -22,26 +22,31 @@ public class Monster : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            for (int i = 0; i < targets.Length; i++)
-            {                
-                dist = Vector3.Distance(player.transform.position, targets[i].transform.position);
+            ClosesetTarget(); 
+        }
 
-                if (i == 0)
+        transform.Translate(Vector3.Normalize(closestTarget.transform.position - transform.position) * monsterSpeed * Time.deltaTime);
+    }
+
+    public void ClosesetTarget()
+    {
+        for (int i = 0; i < targets.Length; i++)
+        {
+            dist = Vector3.Distance(player.transform.position, targets[i].transform.position);
+
+            if (i == 0)
+            {
+                closestDist = dist;
+                closestTarget = targets[i];
+            }
+            else
+            {
+                if (dist < closestDist)
                 {
                     closestDist = dist;
                     closestTarget = targets[i];
                 }
-                else
-                {
-                    if (dist < closestDist)
-                    {
-                        closestDist = dist;
-                        closestTarget = targets[i];
-                    }
-                }
-            }  
+            }
         }
-
-        transform.Translate(Vector3.Normalize(closestTarget.transform.position - transform.position) * monsterSpeed * Time.deltaTime);
     }
 }
