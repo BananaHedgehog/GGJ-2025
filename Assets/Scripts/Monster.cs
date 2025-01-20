@@ -39,8 +39,6 @@ public class Monster : MonoBehaviour
                         closestTarget = targets[i];
                     }
                 }
-
-                Debug.Log(i);
             }  
         }
 
