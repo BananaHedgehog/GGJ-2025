@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (Mathf.Approximately(horizontalInput, 0) && Mathf.Approximately(verticalInput, 0))
+        {
+            playerRb.velocity = new Vector3(0, 0, 0);
+        }
         Vector3 input = new Vector3(horizontalInput, 0, verticalInput).normalized;
         input = playerRb.rotation * input;
         playerRb.MovePosition(transform.position + input * Time.fixedDeltaTime * speed);
