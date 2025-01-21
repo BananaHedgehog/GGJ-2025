@@ -70,6 +70,7 @@ public class Monster : MonoBehaviour
     public void AddEdge(int u, int v, int weight)
     {
         adjacencyList[u].Add(new Tuple<int, int>(v, weight));
+        adjacencyList[v].Add(new Tuple<int, int>(u, weight));
     }
 
     public List<int> Dijkstra(int source)
