@@ -6,20 +6,20 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     public GameObject player;
-    public GameObject[] targets;
-    public GameObject closestTarget;
+    public List<GameObject> vertObjects;
+    private List<int> listOfTargets = new List<int>();
+    private GameObject closestTarget;
     public float monsterSpeed = 7;
     float dist;
     float closestDist;
-
+    
     public int numVerts;
-    public GameObject[] vertObjects;
     private List<Tuple<int, int>>[] adjacencyList;
-    public int[] distances;
-    public bool[] visited;
-    public int[] predecessors;
+    private int[] distances;
+    private bool[] visited;
+    private int[] predecessors;
     public int endVert;
-    public int source;
+    public int startVert;
 
 
     // Start is called before the first frame update
@@ -53,7 +53,7 @@ public class Monster : MonoBehaviour
         AddEdge(2, 3, 2);
         AddEdge(3, 4, 2);
 
-        Dijkstra(source);
+        Dijkstra(startVert, endVert);
     }
 
     // Update is called once per frame
@@ -61,10 +61,22 @@ public class Monster : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ClosesetTarget(); 
+            startVert = vertObjects.IndexOf(FindClosestPointTo(gameObject));
+            endVert = vertObjects.IndexOf(FindClosestPointTo(player));
+            listOfTargets =  Dijkstra(startVert, endVert);
         }
 
-        transform.Translate(Vector3.Normalize(closestTarget.transform.position - transform.position) * monsterSpeed * Time.deltaTime);
+        if (listOfTargets.Count > 0)
+        {
+            GameObject currentTarget = vertObjects[listOfTargets[listOfTargets.Count - 1]];
+            transform.Translate(Vector3.Normalize(currentTarget.transform.position - transform.position) * monsterSpeed * Time.deltaTime);
+
+            if (Vector3.Distance(currentTarget.transform.position, gameObject.transform.position) < 1)
+            {
+                listOfTargets.RemoveAt(listOfTargets.Count - 1);
+            }
+        }
+        
     }
 
     public void AddEdge(int u, int v, int weight)
@@ -73,7 +85,7 @@ public class Monster : MonoBehaviour
         adjacencyList[v].Add(new Tuple<int, int>(u, weight));
     }
 
-    public List<int> Dijkstra(int source)
+    public List<int> Dijkstra(int source, int end)
     {
         for (int i = 0; i < numVerts; i++)
         {
@@ -87,9 +99,9 @@ public class Monster : MonoBehaviour
             int u = MinDistance(distances, visited);
             visited[u] = true;
 
-            if (u == endVert)
+            if (u == end)
             {
-                return GetPath(predecessors, source, endVert); ;
+                return GetPath(predecessors, source, end); ;
             }
 
             foreach (var neighbour in adjacencyList[u])
@@ -104,7 +116,7 @@ public class Monster : MonoBehaviour
                 }
             }
         }
-        return GetPath(predecessors, source, endVert); ;
+        return GetPath(predecessors, source, end); ;
     }
 
     public int MinDistance(int[] distances, bool[] visited)
@@ -124,10 +136,10 @@ public class Monster : MonoBehaviour
         return minIndex;
     }
 
-    public List<int> GetPath(int[] predecessors, int source, int endVert)
+    public List<int> GetPath(int[] predecessors, int source, int end)
     {
         List<int> path = new List<int>();
-        int current = endVert;
+        int current = end;
         while (current != source)
         {
             path.Add(current);
@@ -142,26 +154,28 @@ public class Monster : MonoBehaviour
         return path;
     }
 
-    public void ClosesetTarget()
+    public GameObject FindClosestPointTo(GameObject sourceObj)
     {
-        for (int i = 0; i < targets.Length; i++)
+        for (int i = 0; i < vertObjects.Count; i++)
         {
-            dist = Vector3.Distance(player.transform.position, targets[i].transform.position);
+            dist = Vector3.Distance(sourceObj.transform.position, vertObjects[i].transform.position);
 
             if (i == 0)
             {
                 
                 closestDist = dist;
-                closestTarget = targets[i];
+                closestTarget = vertObjects[i];
             }
             else
             {
                 if (dist < closestDist)
                 {
                     closestDist = dist;
-                    closestTarget = targets[i];
+                    closestTarget = vertObjects[i];
                 }
             }
         }
+
+        return closestTarget;
     }
 }
