@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         
-        lookRotation.y += -Input.GetAxis("Mouse X");
-        lookRotation.x += Input.GetAxis("Mouse Y");
+        lookRotation.y += Input.GetAxis("Mouse X");
+        lookRotation.x += -Input.GetAxis("Mouse Y");
 
         transform.eulerAngles = (Vector2)lookRotation * lookSpeed;
 
