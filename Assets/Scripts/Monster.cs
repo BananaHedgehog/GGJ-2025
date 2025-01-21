@@ -17,7 +17,9 @@ public class Monster : MonoBehaviour
     private List<Tuple<int, int>>[] adjacencyList;
     public int[] distances;
     public bool[] visited;
+    public int[] predecessors;
     public int endVert;
+    public int source;
 
 
     // Start is called before the first frame update
@@ -32,8 +34,9 @@ public class Monster : MonoBehaviour
 
         distances = new int[numVerts];
         visited = new bool[numVerts];
+        predecessors = new int[numVerts];
 
-        AddEdge(0, 1, 10);
+        /*AddEdge(0, 1, 10);
         AddEdge(0, 4, 5);
         AddEdge(1, 2, 1);
         AddEdge(1, 4, 2);
@@ -42,9 +45,15 @@ public class Monster : MonoBehaviour
         AddEdge(3, 2, 6);
         AddEdge(4, 1, 3);
         AddEdge(4, 2, 9);
-        AddEdge(4, 3, 2);
+        AddEdge(4, 3, 2);*/
 
-        Dijkstra(0);
+        AddEdge(0, 1, 2);
+        AddEdge(0, 2, 1);
+        AddEdge(1, 2, 2);
+        AddEdge(2, 3, 2);
+        AddEdge(3, 4, 2);
+
+        Dijkstra(source);
     }
 
     // Update is called once per frame
@@ -63,7 +72,7 @@ public class Monster : MonoBehaviour
         adjacencyList[u].Add(new Tuple<int, int>(v, weight));
     }
 
-    public void Dijkstra(int source)
+    public List<int> Dijkstra(int source)
     {
         for (int i = 0; i < numVerts; i++)
         {
@@ -77,6 +86,11 @@ public class Monster : MonoBehaviour
             int u = MinDistance(distances, visited);
             visited[u] = true;
 
+            if (u == endVert)
+            {
+                return GetPath(predecessors, source, endVert); ;
+            }
+
             foreach (var neighbour in adjacencyList[u])
             {
                 int v = neighbour.Item1;
@@ -85,9 +99,11 @@ public class Monster : MonoBehaviour
                 if (!visited[v] && distances[u] != int.MaxValue && distances[u] + weight < distances[v])
                 {
                     distances[v] = distances[u] + weight;
+                    predecessors[v] = u;
                 }
             }
         }
+        return GetPath(predecessors, source, endVert); ;
     }
 
     public int MinDistance(int[] distances, bool[] visited)
@@ -105,6 +121,24 @@ public class Monster : MonoBehaviour
         }
 
         return minIndex;
+    }
+
+    public List<int> GetPath(int[] predecessors, int source, int endVert)
+    {
+        List<int> path = new List<int>();
+        int current = endVert;
+        while (current != source)
+        {
+            path.Add(current);
+            current = predecessors[current];
+        }
+        path.Add(current);
+
+        for (int i = 0; i < path.Count; i++)
+        {
+            Debug.Log(path[i]);
+        }
+        return path;
     }
 
     public void ClosesetTarget()

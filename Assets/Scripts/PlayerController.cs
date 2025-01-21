@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     public void Countdown()
     {
         timeRemaining--;
-        Debug.Log(timeRemaining);
+        //Debug.Log(timeRemaining);
 
         if (timeRemaining > 0)
         {
