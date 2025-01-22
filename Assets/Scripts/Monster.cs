@@ -37,24 +37,24 @@ public class Monster : MonoBehaviour
         visited = new bool[numVerts];
         predecessors = new int[numVerts];
 
-        /*AddEdge(0, 1, 10);
-        AddEdge(0, 4, 5);
-        AddEdge(1, 2, 1);
-        AddEdge(1, 4, 2);
-        AddEdge(2, 3, 4);
-        AddEdge(3, 0, 7);
-        AddEdge(3, 2, 6);
-        AddEdge(4, 1, 3);
-        AddEdge(4, 2, 9);
-        AddEdge(4, 3, 2);*/
-
-        AddEdge(0, 1, 2);
-        AddEdge(0, 2, 1);
-        AddEdge(1, 2, 2);
-        AddEdge(2, 3, 2);
-        AddEdge(3, 4, 2);
-
-        Dijkstra(startVert, endVert);
+        AddEdge(0, 7, 1);
+        AddEdge(1, 8, 1);
+        AddEdge(1, 9, 1);
+        AddEdge(2, 10, 1);
+        AddEdge(2, 11, 1);
+        AddEdge(2, 13, 1);
+        AddEdge(3, 14, 1);
+        AddEdge(3, 15, 1);
+        AddEdge(4, 12, 1);
+        AddEdge(5, 16, 1);
+        AddEdge(5, 17, 1);
+        AddEdge(6, 18, 1);
+        AddEdge(7, 8, 1);
+        AddEdge(9, 10, 1);
+        AddEdge(11, 12, 1);
+        AddEdge(13, 14, 1);
+        AddEdge(15, 16, 1);
+        AddEdge(17, 18, 1);
     }
 
     // Update is called once per frame
