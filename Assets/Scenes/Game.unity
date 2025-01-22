@@ -8533,7 +8533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parameters:
     albedo: {r: 0, g: 0, b: 0, a: 1}
-    meanFreePath: 10
+    meanFreePath: 4
     blendingMode: 1
     priority: 0
     anisotropy: 0
@@ -9709,7 +9709,7 @@ MonoBehaviour:
   speed: 5
   lookSpeed: 2
   playerRb: {fileID: 1437958990}
-  breathTimer: 30
+  breathTimer: 15
   timeRemaining: 0
   deathScreens:
   - deathType: 0
@@ -9832,7 +9832,7 @@ MonoBehaviour:
   torch: {fileID: 1667946545}
   hasCharge: 0
   isOn: 0
-  onTime: 10
+  onTime: 3
   rechargeTime: 5
 --- !u!135 &1437958992
 SphereCollider:
@@ -10519,9 +10519,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 30
+  m_MaxValue: 15
   m_WholeNumbers: 1
-  m_Value: 30
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
