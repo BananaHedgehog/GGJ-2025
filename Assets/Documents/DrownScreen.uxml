@@ -2,6 +2,7 @@
     <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: center; background-color: rgba(46, 96, 217, 0.58);">
         <ui:Label tabindex="-1" text="End of the line" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold-and-italic; font-size: 32px; -unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&quot;); color: rgb(255, 0, 32);" />
         <ui:Label tabindex="-1" text="looks like it&apos;s Davy Jones&apos; locker for ye..." parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 254, 254);" />
-        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+        <ui:Button text="resurrect" parse-escape-sequences="true" display-tooltip-when-elided="true" name="restart" style="height: 39px;" />
+        <ui:Button text="give up" parse-escape-sequences="true" display-tooltip-when-elided="true" name="quit" style="height: 39px;" />
     </ui:VisualElement>
 </ui:UXML>
