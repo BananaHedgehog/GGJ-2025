@@ -64,7 +64,15 @@ public class Monster : MonoBehaviour
         {
             startVert = vertObjects.IndexOf(FindClosestPointTo(gameObject));
             endVert = vertObjects.IndexOf(FindClosestPointTo(player));
-            listOfTargets =  Dijkstra(startVert, endVert);
+            if (startVert == endVert)
+            {
+                //kill
+                Debug.Log("die");
+            }
+            else
+            {
+                listOfTargets = Dijkstra(startVert, endVert);
+            }
         }
 
         if (listOfTargets.Count > 0)
@@ -148,10 +156,10 @@ public class Monster : MonoBehaviour
         }
         path.Add(current);
 
-        for (int i = 0; i < path.Count; i++)
+        /*for (int i = 0; i < path.Count; i++)
         {
             Debug.Log(path[i]);
-        }
+        }*/
         return path;
     }
 
