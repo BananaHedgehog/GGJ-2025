@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,7 +10,7 @@ public class PauseMenu : MonoBehaviour
     {
         return isPaused;
     }
-    
+
     private void Awake()
     {
         var resumeButton = pauseMenu.rootVisualElement.Q<Button>("resume");

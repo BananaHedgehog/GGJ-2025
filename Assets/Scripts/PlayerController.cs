@@ -69,4 +69,14 @@ public class PlayerController : MonoBehaviour
             Debug.Log("end timer");
         }
     }
+
+    public void Die()
+    {
+        Debug.Log("You died!");
+    }
+
+    public void Win()
+    {
+        Debug.Log("You win!");
+    }
 }
