@@ -31,6 +31,11 @@ public class PauseMenu : MonoBehaviour
         if (!Input.GetKeyDown(KeyCode.Escape)) {
             return;
         }
+
+        if (PlayerController.IsDead())
+        {
+            return;   
+        }
         if (Time.timeScale is 1) {
             Pause();
         } else {

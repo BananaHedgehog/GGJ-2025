@@ -22,6 +22,12 @@ public class PlayerController : MonoBehaviour
     public int timeRemaining;
     [SerializeField] private DeathScreens[] deathScreens;
     [SerializeField] private UIDocument winScreen;
+    
+    private static bool isDead = false;
+    public static bool IsDead()
+    {
+        return isDead;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -104,6 +110,7 @@ public class PlayerController : MonoBehaviour
     public void Die(DeathTypes method)
     {
         Time.timeScale = 0;
+        isDead = true;
         foreach (var deathScreen in deathScreens)
         {
             if (deathScreen.deathType == method)
@@ -115,6 +122,7 @@ public class PlayerController : MonoBehaviour
 
     public void Win()
     {
+        isDead = true;
         Time.timeScale = 0;
         winScreen.rootVisualElement.style.display = DisplayStyle.Flex;
     }
