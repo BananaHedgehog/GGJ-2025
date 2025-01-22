@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Collectible : MonoBehaviour
 {
+    public PlayerController plrController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class Collectible : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //win
-            Debug.Log("win");
+            plrController.Win();
         }
     }
 }
