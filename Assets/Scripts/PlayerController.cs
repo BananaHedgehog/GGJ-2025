@@ -1,4 +1,13 @@
+using System;
 using UnityEngine;
+using UnityEngine.UIElements;
+
+[Serializable]
+public class DeathScreens
+{
+    [SerializeField] private PlayerController.DeathTypes deathType;
+    [SerializeField] private UIDocument deathScreen;
+}
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private bool isCounting;
     public int breathTimer = 30;
     public int timeRemaining;
+    [SerializeField] private DeathScreens[] deathScreens;
+    [SerializeField] private UIDocument winScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +88,8 @@ public class PlayerController : MonoBehaviour
         Monster,
         Other
     }
+    
+    
 
     public void Die(DeathTypes method)
     {
