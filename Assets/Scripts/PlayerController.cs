@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.Video;
 
 [Serializable]
 public class DeathScreens
@@ -32,6 +33,9 @@ public class PlayerController : MonoBehaviour
         return isDead;
     }
 
+    [SerializeField] private VideoPlayer videoPlayer;
+    [SerializeField] private GameObject altCamera;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +51,7 @@ public class PlayerController : MonoBehaviour
         winScreen.rootVisualElement.style.display = DisplayStyle.None;
         winScreen.rootVisualElement.Q<Button>("restart").clicked += Restart;
         winScreen.rootVisualElement.Q<Button>("quit").clicked += Quit;
+        altCamera.SetActive(false);
     }
 
     // Update is called once per frame
@@ -125,6 +130,16 @@ public class PlayerController : MonoBehaviour
     {
         Time.timeScale = 0;
         isDead = true;
+        if (method == DeathTypes.Monster)
+        {
+            var cam = GetComponentInChildren<Camera>();
+            cam.enabled = false;
+            var altCam = altCamera.GetComponent<Camera>();
+            altCamera.SetActive(true);
+            altCam.enabled = true;
+            videoPlayer.Play();
+            _ = new WaitForSeconds(2);
+        }
         foreach (var deathScreen in deathScreens)
         {
             if (deathScreen.deathType == method)
@@ -132,6 +147,7 @@ public class PlayerController : MonoBehaviour
                 deathScreen.deathScreen.rootVisualElement.style.display = DisplayStyle.Flex;
             }
         }
+
     }
 
     public void Win()
