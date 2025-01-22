@@ -70,9 +70,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Die()
+    public enum DeathTypes
     {
-        Debug.Log("You died!");
+        Drown,
+        Monster,
+        Other
+    }
+
+    public void Die(DeathTypes method)
+    {
+        Debug.Log("You died by " + method);
     }
 
     public void Win()
