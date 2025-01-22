@@ -5603,21 +5603,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parameters:
-    albedo: {r: 1, g: 1, b: 1, a: 1}
-    meanFreePath: 50
+    albedo: {r: 0, g: 0, b: 0, a: 1}
+    meanFreePath: 5
     blendingMode: 1
     priority: 0
     anisotropy: 0
     volumeMask: {fileID: 0}
     textureScrollingSpeed: {x: 0, y: 0, z: 0}
     textureTiling: {x: 1, y: 1, z: 1}
-    positiveFade: {x: 0.02, y: 0.02, z: 0.02}
-    negativeFade: {x: 0.02, y: 0.02, z: 0.02}
+    positiveFade: {x: 0.005, y: 0.005, z: 0.005}
+    negativeFade: {x: 0.005, y: 0.005, z: 0.005}
     m_EditorUniformFade: 0.1
-    m_EditorPositiveFade: {x: 0.02, y: 0.02, z: 0.02}
-    m_EditorNegativeFade: {x: 0.02, y: 0.02, z: 0.02}
+    m_EditorPositiveFade: {x: 0.0049999994, y: 0.005, z: 0.005}
+    m_EditorNegativeFade: {x: 0.0049999994, y: 0.005, z: 0.005}
     m_EditorAdvancedFade: 0
-    size: {x: 5, y: 5, z: 5}
+    size: {x: 20, y: 20, z: 20}
     invertFade: 0
     distanceFadeStart: 10
     distanceFadeEnd: 10000
