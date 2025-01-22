@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die(DeathTypes method)
     {
-        Debug.Log("You died by " + method);
+        Time.timeScale = 0;
         foreach (var deathScreen in deathScreens)
         {
             if (deathScreen.deathType == method)
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public void Win()
     {
-        Debug.Log("You win!");
+        Time.timeScale = 0;
         winScreen.rootVisualElement.style.display = DisplayStyle.Flex;
     }
 }
