@@ -30,9 +30,13 @@ public class PlayerController : MonoBehaviour
         foreach (var deathScreen in deathScreens)
         {
             deathScreen.deathScreen.rootVisualElement.style.display = DisplayStyle.None;
+            deathScreen.deathScreen.rootVisualElement.Q<Button>("restart").clicked += Restart;
+            deathScreen.deathScreen.rootVisualElement.Q<Button>("quit").clicked += Quit;
         }
 
         winScreen.rootVisualElement.style.display = DisplayStyle.None;
+        winScreen.rootVisualElement.Q<Button>("restart").clicked += Restart;
+        winScreen.rootVisualElement.Q<Button>("quit").clicked += Quit;
     }
 
     // Update is called once per frame
@@ -113,5 +117,15 @@ public class PlayerController : MonoBehaviour
     {
         Time.timeScale = 0;
         winScreen.rootVisualElement.style.display = DisplayStyle.Flex;
+    }
+    
+    private void Restart()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
+    
+    private void Quit() {
+        Application.Quit();
     }
 }
