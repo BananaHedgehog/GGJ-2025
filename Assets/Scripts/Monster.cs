@@ -6,6 +6,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     public GameObject player;
+    public PlayerController plrController;
     public List<GameObject> vertObjects;
     public List<GameObject> caveTargets;
     private List<int> listOfTargets = new List<int>();
@@ -67,7 +68,7 @@ public class Monster : MonoBehaviour
             if (startVert == endVert)
             {
                 //kill
-                Debug.Log("die");
+                plrController.Die(PlayerController.DeathTypes.Monster);
             }
             else
             {
@@ -93,7 +94,7 @@ public class Monster : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //kill
-            Debug.Log("die");
+            plrController.Die(PlayerController.DeathTypes.Monster);
         }
     }
 
