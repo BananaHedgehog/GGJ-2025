@@ -7,6 +7,7 @@ public class Monster : MonoBehaviour
 {
     public GameObject player;
     public List<GameObject> vertObjects;
+    public List<GameObject> caveTargets;
     private List<int> listOfTargets = new List<int>();
     private GameObject closestTarget;
     public float monsterSpeed = 7;
@@ -156,9 +157,9 @@ public class Monster : MonoBehaviour
 
     public GameObject FindClosestPointTo(GameObject sourceObj)
     {
-        for (int i = 0; i < vertObjects.Count; i++)
+        for (int i = 0; i < caveTargets.Count; i++)
         {
-            dist = Vector3.Distance(sourceObj.transform.position, vertObjects[i].transform.position);
+            dist = Vector3.Distance(sourceObj.transform.position, caveTargets[i].transform.position);
 
             if (i == 0)
             {
