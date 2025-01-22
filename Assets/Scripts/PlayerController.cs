@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public int timeRemaining;
     [SerializeField] private DeathScreens[] deathScreens;
     [SerializeField] private UIDocument winScreen;
+    public ParticleSystem bubbleEmitter;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             timeRemaining = breathTimer;
+            StartCoroutine(PlayBubbles());
         }
     }
     private void FixedUpdate()
@@ -60,6 +63,15 @@ public class PlayerController : MonoBehaviour
         Vector3 input = new Vector3(horizontalInput, 0, verticalInput).normalized;
         input = playerRb.rotation * input;
         playerRb.MovePosition(transform.position + input * Time.fixedDeltaTime * speed);
+    }
+
+    IEnumerator PlayBubbles()
+    {
+        Debug.Log("playing");
+        bubbleEmitter.Play();
+        yield return new WaitForSeconds(2);
+        bubbleEmitter.Stop();
+        Debug.Log("stopped");
     }
 
     public void BeginTimer()
