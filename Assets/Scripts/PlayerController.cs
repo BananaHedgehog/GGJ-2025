@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 [Serializable]
 public class DeathScreens
 {
-    [SerializeField] private PlayerController.DeathTypes deathType;
-    [SerializeField] private UIDocument deathScreen;
+    public PlayerController.DeathTypes deathType;
+    public UIDocument deathScreen;
 }
 
 public class PlayerController : MonoBehaviour
@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         BeginTimer();
+        foreach (var deathScreen in deathScreens)
+        {
+            deathScreen.deathScreen.rootVisualElement.style.display = DisplayStyle.None;
+        }
+
+        winScreen.rootVisualElement.style.display = DisplayStyle.None;
     }
 
     // Update is called once per frame
@@ -94,10 +100,18 @@ public class PlayerController : MonoBehaviour
     public void Die(DeathTypes method)
     {
         Debug.Log("You died by " + method);
+        foreach (var deathScreen in deathScreens)
+        {
+            if (deathScreen.deathType == method)
+            {
+                deathScreen.deathScreen.rootVisualElement.style.display = DisplayStyle.Flex;
+            }
+        }
     }
 
     public void Win()
     {
         Debug.Log("You win!");
+        winScreen.rootVisualElement.style.display = DisplayStyle.Flex;
     }
 }
