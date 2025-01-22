@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.Log("end timer");
+            Die(DeathTypes.Drown);
         }
     }
 

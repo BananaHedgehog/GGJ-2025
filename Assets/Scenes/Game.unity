@@ -6502,6 +6502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1437958984}
+  plrController: {fileID: 1437958985}
   vertObjects:
   - {fileID: 1649148978}
   - {fileID: 1824628590}
