@@ -88,6 +88,15 @@ public class Monster : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //kill
+            Debug.Log("die");
+        }
+    }
+
     public void AddEdge(int u, int v, int weight)
     {
         adjacencyList[u].Add(new Tuple<int, int>(v, weight));
