@@ -6,30 +6,39 @@ using UnityEngine.UIElements;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField] private UIDocument mainMenu;
     [SerializeField] private UIDocument learnModal;
 
     private void Awake()
     {
+        mainMenu.rootVisualElement.style.display = DisplayStyle.Flex;
+        mainMenu.rootVisualElement.Q<Button>("start").clicked += OnPlayButton;
+        mainMenu.rootVisualElement.Q<Button>("learn").clicked += OnLearnButton;
+        mainMenu.rootVisualElement.Q<Button>("quit").clicked += OnQuitButton;
+        
         var returnButton = learnModal.rootVisualElement.Q<Button>("return");
         returnButton.clicked += HideModal;
         HideModal();
     }
     
-    public void OnPlayButton() {
+    private void OnPlayButton() {
+        mainMenu.rootVisualElement.style.display = DisplayStyle.None;
         SceneManager.LoadScene(1);
     }
 
-    public void OnLearnButton()
+    private void OnLearnButton()
     {
+        mainMenu.rootVisualElement.style.display = DisplayStyle.None;
         learnModal.rootVisualElement.style.display = DisplayStyle.Flex;
     }
 
-    public void HideModal()
+    private void HideModal()
     {
         learnModal.rootVisualElement.style.display = DisplayStyle.None;
+        mainMenu.rootVisualElement.style.display = DisplayStyle.Flex;
     }
     
-    public void OnQuitButton() {
+    private void OnQuitButton() {
         Application.Quit();
     }
 }
