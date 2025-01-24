@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Video;
+using Cursor = UnityEngine.Cursor;
 
 [Serializable]
 public class DeathScreens
@@ -52,6 +53,8 @@ public class PlayerController : MonoBehaviour
         winScreen.rootVisualElement.Q<Button>("restart").clicked += Restart;
         winScreen.rootVisualElement.Q<Button>("quit").clicked += Quit;
         altCamera.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
