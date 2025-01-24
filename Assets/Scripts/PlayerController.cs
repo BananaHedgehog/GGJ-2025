@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private DeathScreens[] deathScreens;
     [SerializeField] private UIDocument winScreen;
     public ParticleSystem bubbleEmitter;
+    private float timer;
 
     
     private static bool isDead = false;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         BeginTimer();
+        timer = 0;
         foreach (var deathScreen in deathScreens)
         {
             deathScreen.deathScreen.rootVisualElement.style.display = DisplayStyle.None;
@@ -67,6 +69,11 @@ public class PlayerController : MonoBehaviour
         lookRotation.x += -Input.GetAxis("Mouse Y");
 
         transform.eulerAngles = (Vector2)lookRotation * lookSpeed;
+
+        if (!isDead)
+        {
+            timer += Time.deltaTime;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -100,7 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             isCounting = true;
             timeRemaining = breathTimer;
-            Invoke("Countdown", 1f);
+            Invoke(nameof(Countdown), 1f);
         }
     }
 
@@ -150,9 +157,16 @@ public class PlayerController : MonoBehaviour
             if (deathScreen.deathType == method)
             {
                 deathScreen.deathScreen.rootVisualElement.style.display = DisplayStyle.Flex;
+                deathScreen.deathScreen.rootVisualElement.Q<Label>("time").text = GetPrettyTime();
             }
         }
 
+    }
+
+    private string GetPrettyTime()
+    {
+        var fancyTime = TimeSpan.FromSeconds(timer);
+        return fancyTime.Minutes + ":" + fancyTime.Seconds + ":" + fancyTime.Milliseconds; 
     }
 
     public void Win()
@@ -162,6 +176,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         winScreen.rootVisualElement.style.display = DisplayStyle.Flex;
+        winScreen.rootVisualElement.Q<Label>("time").text = GetPrettyTime();
     }
     
     private void Restart()
