@@ -28,7 +28,10 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem bubbleEmitter;
     private float timer;
 
-    
+    public AudioSource breatheAudio;
+    public AudioSource bubbleAudio;
+
+
     private static bool isDead = false;
     public static bool IsDead()
     {
@@ -79,6 +82,8 @@ public class PlayerController : MonoBehaviour
         {
             timeRemaining = breathTimer;
             StartCoroutine(PlayBubbles());
+            breatheAudio.Play();
+            bubbleAudio.Play();
         }
     }
     private void FixedUpdate()
