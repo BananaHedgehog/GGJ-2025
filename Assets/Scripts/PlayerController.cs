@@ -133,6 +133,8 @@ public class PlayerController : MonoBehaviour
     {
         Time.timeScale = 0;
         isDead = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         if (method == DeathTypes.Monster)
         {
             var cam = GetComponentInChildren<Camera>();
@@ -157,6 +159,8 @@ public class PlayerController : MonoBehaviour
     {
         isDead = true;
         Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         winScreen.rootVisualElement.style.display = DisplayStyle.Flex;
     }
     

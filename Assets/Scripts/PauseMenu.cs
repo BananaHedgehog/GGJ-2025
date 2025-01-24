@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -38,8 +39,12 @@ public class PauseMenu : MonoBehaviour
         }
         if (Time.timeScale is 1) {
             Pause();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         } else {
             Resume();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
